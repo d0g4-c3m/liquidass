@@ -18,6 +18,7 @@ RUNTIME_FILES := Runtime/LGLiquidGlassRuntime.m Runtime/LGSnapshotCaptureSupport
 PREF_CONTROL_FILES := LiquidAssPrefs/LGPrefsLiquidSlider.m LiquidAssPrefs/LGPrefsLiquidSwitch.m
 $(TWEAK_NAME)_FILES = Tweak.x $(HOOK_FILES) $(SHARED_FILES) $(RUNTIME_FILES) $(PREF_CONTROL_FILES)
 $(TWEAK_NAME)_CFLAGS = -fobjc-arc
+ADDITIONAL_CFLAGS += -Wno-error
 $(TWEAK_NAME)_FRAMEWORKS = UIKit MetalKit
 
 include $(THEOS)/makefiles/tweak.mk
