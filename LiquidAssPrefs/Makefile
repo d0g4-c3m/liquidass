@@ -8,7 +8,7 @@ PREF_LOCAL_FILES := LGPRootListController.m LGPSurfaceController.m LGPrefsDataSu
 LiquidAssPrefs_FILES = $(PREF_LOCAL_FILES) $(PREF_SHARED_FILES) $(PREF_RUNTIME_FILES)
 LiquidAssPrefs_FRAMEWORKS = UIKit MetalKit MetalPerformanceShaders
 LiquidAssPrefs_INSTALL_PATH = /Library/PreferenceBundles
-LiquidAssPrefs_CFLAGS = -fobjc-arc -I../Shared -I../Runtime
+LiquidAssPrefs_CFLAGS = -fobjc-arc -I../Shared -I../Runtime -fobjc-arc -Wno-error
 LiquidAssPrefs_LDFLAGS += -Wl,-undefined,dynamic_lookup
 
 include $(THEOS_MAKE_PATH)/bundle.mk
