@@ -1,0 +1,33 @@
+name: CI
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    # Use macOS for the "real" build to avoid the ABI/crashing issues
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive # Important if the tweak has dependencies
+
+      - name: Setup Theos
+        uses: Randomblock1/theos-action@v1
+        with:
+          theos-src: 'https://github.com/theos/theos'
+          theos-sdks: 'https://github.com/theos/sdks'
+
+      - name: Build Package
+        run: |
+          # Reverting the 'fake' fixes we did in Cloud Shell
+          # Building for Rootless (iOS 15/16/17)
+          export THEOS_PACKAGE_SCHEME=rootless
+          make package ARCHS="arm64 arm64e" TARGET="iphone:clang:latest:15.0" FINALPACKAGE=1
+        
+      - name: Upload Package
+        uses: actions/upload-artifact@v7
+        with:
+          name: LiquidAss-Rootless-Build
+          path: packages/*.deb
